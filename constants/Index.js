@@ -1,3 +1,5 @@
+export const rapidApiKey = '732a514a99msh465d0cd62c7d247p13be40jsndb6723043581';
+
 export const sliderImages = [
     require('../assets/images/slide1.png'),
     require('../assets/images/slide2.png'),
@@ -48,3 +50,4 @@ export const bodyParts = [
         image: require('../assets/images/waist.png'),
     }
 ]
+
