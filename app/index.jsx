@@ -42,6 +42,7 @@ export default function Index() {
               </TouchableOpacity>
             </Animated.View>
           </LinearGradient>
+          <StatusBar style="light" />
 
     </View>
   )
