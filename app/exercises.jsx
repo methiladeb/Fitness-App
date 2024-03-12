@@ -15,12 +15,12 @@ import {ScrollView} from 'react-native-virtualized-view';
 
 export default function Exercises() {
     const router = useRouter();
-    const [exercises, setExercises] = useState([]);
+    const [exercises, setExercises] = useState(demoExercises);
     const item = useLocalSearchParams();
-    //console.log('got item: ', item);
+    console.log('got item: ', item);
 
     useEffect(()=> {
-      if(item) getExercises(item.name);
+      // if(item) getExercises(item.name);
     },[item]);
   
   const getExercises = async(bodypart)=> {
