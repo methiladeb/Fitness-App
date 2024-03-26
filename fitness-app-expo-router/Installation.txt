@@ -1,0 +1,9 @@
+Follow these steps to successfully run this project:
+- create free account on rapidapi website (https://rapidapi.com)
+- go to https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb and subscribe for testing
+- copy rapid-api key from endpoints
+- past the rapid-api key in constants/index.js file
+- run "npm install"
+- run "npm run start"
+
+If you stuck somewhere contact me on buymeacoffee.com.
