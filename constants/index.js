@@ -1,5 +1,6 @@
+require('dotenv').config();
 
-export const rapidApiKey = '79ed101a1bmshd2d49e0a9cffa59p137909jsn173cb1c34d1e';
+export const rapidApiKey = process.env.RAPID_API_KEY;
 export const sliderImages = [
     require('../assets/images/slide1.png'),
     require('../assets/images/slide3.png'),
