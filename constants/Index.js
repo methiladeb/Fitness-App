@@ -1,4 +1,3 @@
-// register on rapid api, subscirbe exercise db api and use your api key here
 // https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb
 
 export const rapidApiKey = '79ed101a1bmshd2d49e0a9cffa59p137909jsn173cb1c34d1e';

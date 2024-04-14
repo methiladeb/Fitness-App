@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { fetchExercisesByBodypart } from '../api/exerciseDB';
-import { demoExercises } from '../constants';
 import { StatusBar } from 'expo-status-bar';
 import { Image } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -22,7 +21,6 @@ export default function Exercises() {
 
     const getExercises = async (bodypart)=>{
         let data = await fetchExercisesByBodypart(bodypart);
-        // console.log('got data: ', data);
         setExercises(data);
     }
   return (
