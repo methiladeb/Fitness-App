@@ -10,6 +10,8 @@ export default function _layout() {
             headerShown: false
         }}
     >
+
+      {/* Screen for "exercises" without the default header and using a full-screen modal presentation */}
       <Stack.Screen name="exercises" options={{
         presentation: 'fullScreenModal'
       }} />

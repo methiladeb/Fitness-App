@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { rapidApiKey } from '../constants';
+import { rapidApiKey } from '../constants'; // Importing the API key from constants
 
 const baseUrl = 'https://exercisedb.p.rapidapi.com';
 
+// Function to perform API calls with axios
 const apiCall = async (url, params)=>{
     try{
         const options = {
@@ -22,6 +23,7 @@ const apiCall = async (url, params)=>{
     }
 }
 
+// Fetches exercises by body part using the API call function
 export const fetchExercisesByBodypart = async (bodyPart)=>{
     let data = await apiCall(baseUrl+`/exercises/bodyPart/${bodyPart}`);
     return data;
