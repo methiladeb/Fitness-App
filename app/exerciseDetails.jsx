@@ -1,94 +1,131 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, Text, TouchableOpacity, ScrollView, Image, StyleSheet } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Image } from 'expo-image';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Anticons from 'react-native-vector-icons/AntDesign';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
-export default function exerciseDetails() {
+export default function ExerciseDetails() {
     const item = useLocalSearchParams();
     const router = useRouter();
-  return (
-    <View className="flex flex-1">
-        <View className="shadow-md bg-white rounded-b-[40px]">
-            <Image  
-                source={{uri: item.gifUrl}}
-                contentFit='cover'
-                style={{width:wp(100), height: wp(100) }}
-                className="rounded-b-[40px]"
-            />
+
+    return (
+        <View style={styles.flexContainer}>
+            <View style={styles.imageContainer}>
+                <Image  
+                    source={{uri: item.gifUrl}}
+                    style={styles.image}
+                />
+            </View>
+
+            <TouchableOpacity 
+                onPress={() => router.back()}
+                style={styles.closeButton}
+            >
+                <Anticons name="closecircle" size={hp(4.5)} color="#f43f5e" />
+            </TouchableOpacity>
+
+            {/* Details */}
+            <ScrollView 
+                style={styles.detailsContainer}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.contentContainer}
+            >
+                <Animated.Text
+                    entering={FadeInDown.duration(300).springify()}
+                    style={styles.mainText}
+                >
+                    {item.name}
+                </Animated.Text>
+                <DetailsText
+                    label="Equipment"
+                    content={item?.equipment}
+                />
+                <DetailsText
+                    label="Secondary Muscles"
+                    content={item?.secondaryMuscles}
+                />
+                <DetailsText
+                    label="Target"
+                    content={item?.target}
+                />
+                <Instructions instructions={item.instructions} />
+            </ScrollView>
         </View>
-
-        <TouchableOpacity 
-            onPress={()=> router.back()}
-            className="mx-2 absolute rounded-full mt-2 right-0"
-        >
-            <Anticons name="closecircle" size={hp(4.5)} color="#f43f5e" />
-        </TouchableOpacity>
-
-        {/* details */}
-
-        <ScrollView className="mx-4 space-y-2 mt-3" showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 60}}>
-            <Animated.Text
-                entering={FadeInDown.duration(300).springify()}
-                style={{fontSize: hp(3.5)}}
-                className="font-semibold text-neutral-800 tracking-wide"
-            >
-                {item.name}
-            </Animated.Text>
-            <Animated.Text
-                entering={FadeInDown.delay(100).duration(300).springify()}
-                style={{fontSize: hp(2)}}
-                className=" text-neutral-700 tracking-wide"
-            >
-                Equipment <Text className="font-bold text-neutral-800">
-                    {item?.equipment}
-                </Text>
-            </Animated.Text>
-            <Animated.Text
-                entering={FadeInDown.delay(200).duration(300).springify()}
-                style={{fontSize: hp(2)}}
-                className=" text-neutral-700 tracking-wide"
-            >
-                Secondary Muscles <Text className="font-bold text-neutral-800">
-                    {item?.secondaryMuscles}
-                </Text>
-            </Animated.Text>
-            <Animated.Text
-                entering={FadeInDown.delay(300).duration(300).springify()}
-                style={{fontSize: hp(2)}}
-                className=" text-neutral-700 tracking-wide"
-            >
-                Target <Text className="font-bold text-neutral-800">
-                    {item?.target}
-                </Text>
-            </Animated.Text>
-
-            <Animated.Text
-                entering={FadeInDown.delay(400).duration(300).springify()}
-                style={{fontSize: hp(3)}}
-                className="font-semibold text-neutral-800 tracking-wide"
-            >
-                Instructions
-            </Animated.Text>
-
-            {
-                item.instructions?.split(',').map((instruction, index)=>{
-                    return (
-                        <Animated.Text
-                            entering={FadeInDown.delay((index+5)*100).duration(300).springify()}
-                            key={instruction}
-                            style={{fontSize: hp(1.7)}}
-                            className="text-neutral-800"
-                        >
-                            {instruction}
-                        </Animated.Text>
-                    )
-                })
-            }
-        </ScrollView>
-      
-    </View>
-  )
+    );
 }
+
+const DetailsText = ({ label, content }) => (
+    <Animated.Text
+        entering={FadeInDown.delay(100).duration(300).springify()}
+        style={styles.subText}
+    >
+        {label} <Text style={styles.boldText}>{content}</Text>
+    </Animated.Text>
+);
+
+const Instructions = ({ instructions }) => (
+    instructions?.split(',').map((instruction, index) => (
+        <Animated.Text
+            entering={FadeInDown.delay((index + 5) * 100).duration(300).springify()}
+            key={index}
+            style={styles.instructionText}
+        >
+            {instruction}
+        </Animated.Text>
+    ))
+);
+
+const styles = StyleSheet.create({
+    flexContainer: {
+        flex: 1
+    },
+    imageContainer: {
+        shadowOpacity: 0.75,
+        shadowRadius: 5,
+        shadowColor: 'black',
+        shadowOffset: { height: 0, width: 0 },
+        backgroundColor: 'white',
+        borderBottomLeftRadius: 40,
+        borderBottomRightRadius: 40,
+    },
+    image: {
+        width: wp(100),
+        height: wp(100),
+        borderBottomLeftRadius: 40,
+        borderBottomRightRadius: 40,
+    },
+    closeButton: {
+        position: 'absolute',
+        right: wp(2),
+        marginTop: hp(2),
+        borderRadius: 100,
+        backgroundColor: 'transparent'
+    },
+    detailsContainer: {
+        marginHorizontal: wp(4),
+        marginTop: hp(3),
+    },
+    contentContainer: {
+        paddingBottom: 60,
+    },
+    mainText: {
+        fontSize: hp(3.5),
+        fontWeight: 'bold',
+        color: '#404040',
+        marginBottom: hp(2),
+    },
+    subText: {
+        fontSize: hp(2),
+        color: '#606060',
+        marginBottom: hp(1),
+    },
+    boldText: {
+        fontWeight: 'bold',
+        color: '#404040',
+    },
+    instructionText: {
+        fontSize: hp(1.7),
+        color: '#404040',
+    }
+});

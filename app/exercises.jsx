@@ -1,56 +1,89 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { useLocalSearchParams, useRouter } from 'expo-router'
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { fetchExercisesByBodypart } from '../api/exerciseDB';
-import { demoExercises } from '../constants';
 import { StatusBar } from 'expo-status-bar';
-import { Image } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ExerciseList from '../components/ExerciseList';
-import { ScrollView } from 'react-native-virtualized-view'
 
 export default function Exercises() {
     const router = useRouter();
     const [exercises, setExercises] = useState([]);
-    const item = useLocalSearchParams(); // Retrieves search parameters from the router
+    const item = useLocalSearchParams(); // Retrieves search parameters from router
 
-    useEffect(()=>{
-        if(item) getExercises(item.name);
-    },[item]);
+    useEffect(() => {
+        if (item) getExercises(item.name);
+    }, [item]);
 
-    const getExercises = async (bodypart)=>{
+    const getExercises = async (bodypart) => {
         let data = await fetchExercisesByBodypart(bodypart);
-        // console.log('got data: ', data);
         setExercises(data);
     }
-  return (
-    <ScrollView>
-        <StatusBar style="light" />
-        <Image 
-            source={item.image}
-            style={{width: wp(100), height: hp(45)}}
-            className="rounded-b-[40px]"
-        />
 
-        {/* Navigation back button */}
-        <TouchableOpacity
-            onPress={()=> router.back()}
-            className="bg-rose-500 mx-4 absolute flex justify-center items-center pr-1 rounded-full"
-            style={{height: hp(5.5), width: hp(5.5), marginTop: hp(7)}}
-        >
-                 <Ionicons name="caret-back-outline" size={hp(4)} color="white" />
-        </TouchableOpacity>
+    return (
+        <ScrollView style={styles.container}>
+            <StatusBar style="light" />
+            <Image 
+                source={item.image}
+                style={styles.image}
+            />
 
-        {/* List of exercises */}
-        <View className="mx-4 space-y-3 mt-4">
-            <Text style={{fontSize: hp(3)}} className="font-semibold text-neutral-700">
-                {item.name} exercises
-            </Text>
-            <View className="mb-10">
-                <ExerciseList data={exercises} />
+            {/* Navigation back button */}
+            <TouchableOpacity
+                onPress={() => router.back()}
+                style={styles.backButton}
+            >
+                <Ionicons name="caret-back-outline" size={hp(4)} color="white" />
+            </TouchableOpacity>
+
+            {/* List of exercises */}
+            <View style={styles.exercisesContainer}>
+                <Text style={styles.headerText}>
+                    {item.name} exercises
+                </Text>
+                <View style={styles.exerciseListContainer}>
+                    <ExerciseList data={exercises} />
+                </View>
             </View>
-        </View>
-    </ScrollView>
-  )
+        </ScrollView>
+    );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    image: {
+        width: wp(100),
+        height: hp(45),
+        borderBottomLeftRadius: 40,
+        borderBottomRightRadius: 40,
+    },
+    backButton: {
+        backgroundColor: '#f43f5e',
+        position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 1,
+        borderRadius: 100,
+        height: hp(5.5),
+        width: hp(5.5),
+        marginTop: hp(7),
+        marginLeft: wp(4),
+    },
+    exercisesContainer: {
+        marginHorizontal: wp(4),
+        marginTop: hp(4),
+        marginBottom: hp(1),
+    },
+    headerText: {
+        fontSize: hp(3),
+        fontWeight: 'bold',
+        color: '#707070',
+        marginBottom: hp(3),
+    },
+    exerciseListContainer: {
+        marginBottom: hp(10),
+    }
+});

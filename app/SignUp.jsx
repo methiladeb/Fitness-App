@@ -71,3 +71,6 @@ const styles = StyleSheet.create({
 
 // Export the SignUp component
 export default SignUp;
+
+
+
