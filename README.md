@@ -1,7 +1,7 @@
 # Fitness App
 
 ## Important Notice
-This project is with expo SDK 49, and needs to be changed if you want to view it in iOS so that it aligns with the most updates expo version.
+This project is with expo SDK 49, and needs to be changed if you want to view it in iOS so that it aligns with the most updated expo version.
 
 ## Description
 This Fitness App helps users find exercises based on body parts and provides detailed instructions for each exercise. The app supports user authentication, allowing users to sign up and sign.
