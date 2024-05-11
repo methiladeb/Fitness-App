@@ -31,6 +31,8 @@ This Fitness App helps users find exercises based on body parts and provides det
 
 ## Contributors
 
-[Methila Deb](https://github.com/methiladeb)
-[Purna Chowdhury](https://github.com/PurnaChowdhury)
-[Kevin Rojas](https://github.com/Kevin2259)
+- [Methila Deb](https://github.com/methiladeb)
+
+- [Purna Chowdhury](https://github.com/PurnaChowdhury)
+
+- [Kevin Rojas](https://github.com/Kevin2259)
