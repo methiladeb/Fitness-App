@@ -1,5 +1,8 @@
 # Fitness App
 
+## Important Notice
+This project is with expo SDK 49, and needs to be changed if you want to view it in iOS so that it aligns with the most updates expo version.
+
 ## Description
 This Fitness App helps users find exercises based on body parts and provides detailed instructions for each exercise. The app supports user authentication, allowing users to sign up and sign.
 
@@ -26,4 +29,8 @@ This Fitness App helps users find exercises based on body parts and provides det
 3. **View Exercise Details:**
 - Tap on an exercise to view detailed instructions and a gif demonstrating the exercise.
 
+## Contributors
 
+[Methila Deb](https://github.com/methiladeb)
+[Purna Chowdhury](https://github.com/PurnaChowdhury)
+[Kevin Rojas](https://github.com/Kevin2259)
