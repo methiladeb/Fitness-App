@@ -24,7 +24,7 @@ This Fitness App helps users find exercises based on body parts and provides det
 - Enter your email and password to either sign up or sign in.
 
 2. **Browse Exercises:**
-- Once logged in, navigate to the 'Exercises' section to view exercises sorted by body parts.
+- Once logged in, you can navigate to the 'Exercises' section to view exercises sorted by body parts.
 
 3. **View Exercise Details:**
 - Tap on an exercise to view detailed instructions and a gif demonstrating the exercise.
